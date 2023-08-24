@@ -26,7 +26,11 @@
 		. · . ʚ♡︎ɞ· .* .· ʚ♥︎ɞ• . ʚ♡︎ɞ. · • . ʚ♥︎ɞ*· . · .ʚ♡︎ɞ . · . <br>
 		|￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣| <br>
 		|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/member/logout.kh">로그아웃</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="/member/mypage.kh?memberId=${memberId }">마이페이지</a>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  |<br>
+		<form action="/member/mypage.kh" method="post" style="display:inline;">
+			<%-- <input type="hidden" name="memberId" value="${memberId }">  --%>
+			<input type="submit" value="마이페이지"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  |<br>
+		</form>
+		<%-- <a href="/member/mypage.kh?memberId=${memberId }">마이페이지</a>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  |<br> --%>
 		|＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿| <br>
 		　　         ᕱ  ᕱ  &nbsp; ||<br>
 		　         &nbsp;  ( ･ω･ &nbsp;||<br>

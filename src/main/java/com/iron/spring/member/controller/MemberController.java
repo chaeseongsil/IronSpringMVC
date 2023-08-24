@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.iron.spring.member.domain.Member;
@@ -153,13 +154,18 @@ public class MemberController {
 		}
 	}
 	
-	@RequestMapping(value="/member/mypage.kh", method=RequestMethod.GET)
+	@RequestMapping(value="/member/mypage.kh", method= {RequestMethod.GET, RequestMethod.POST})
 	public String showMypageView(
-			@RequestParam("memberId") String memberId
+			HttpSession session
+//			@RequestParam("memberId") String memberId
 			, Model model
 			) {
 		try {
-			Member member = service.selectOneById(memberId);
+			String memberId = (String)session.getAttribute("memberId");
+			Member member = null;
+			if(memberId != "" && memberId != null) {
+				member = service.selectOneById(memberId);
+			}
 			if(member != null) {
 				model.addAttribute("member", member);
 				return "member/mypage";

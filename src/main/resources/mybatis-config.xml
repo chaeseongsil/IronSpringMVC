@@ -9,9 +9,11 @@
 	<typeAliases>
 		<typeAlias type="com.iron.spring.member.domain.Member" alias="Member"/>
 		<typeAlias type="com.iron.spring.notice.domain.Notice" alias="Notice"/>
+		<typeAlias type="com.iron.spring.board.domain.Board" alias="Board"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/member/member-mapper.xml"/>
 		<mapper resource="mappers/notice-mapper.xml"/>
+		<mapper resource="mappers/board-mapper.xml"/>
 	</mappers>
 </configuration>
