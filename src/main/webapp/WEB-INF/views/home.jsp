@@ -25,11 +25,13 @@
 		　ξ_ξξ_ξ　ξ_ξξ_ξ <br>
 		. · . ʚ♡︎ɞ· .* .· ʚ♥︎ɞ• . ʚ♡︎ɞ. · • . ʚ♥︎ɞ*· . · .ʚ♡︎ɞ . · . <br>
 		|￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣| <br>
-		|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/member/logout.kh">로그아웃</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		|&nbsp;&nbsp;&nbsp;<a href="/member/logout.kh">로그아웃</a> &nbsp;&nbsp;
 		<form action="/member/mypage.kh" method="post" style="display:inline;">
 			<%-- <input type="hidden" name="memberId" value="${memberId }">  --%>
-			<input type="submit" value="마이페이지"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  |<br>
+			<input type="submit" value="마이페이지"> &nbsp;&nbsp;
+			<a href="/board/list.kh">게시글</a>  &nbsp;&nbsp;|<br>
 		</form>
+		
 		<%-- <a href="/member/mypage.kh?memberId=${memberId }">마이페이지</a>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  |<br> --%>
 		|＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿| <br>
 		　　         ᕱ  ᕱ  &nbsp; ||<br>

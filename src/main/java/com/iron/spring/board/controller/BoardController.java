@@ -21,13 +21,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.iron.spring.board.domain.Board;
 import com.iron.spring.board.domain.PageInfo;
+import com.iron.spring.board.domain.Reply;
 import com.iron.spring.board.service.BoardService;
+import com.iron.spring.board.service.ReplyService;
 
 @Controller
 public class BoardController {
 	
 	@Autowired
 	private BoardService service;
+	@Autowired
+	private ReplyService rService;
 	
 	@RequestMapping(value="/board/list.kh", method=RequestMethod.GET)
 	public ModelAndView showBoardList(
@@ -50,6 +54,10 @@ public class BoardController {
 		try {
 			Board board = service.selectOneByNo(boardNo);
 			if(board != null) {
+				List<Reply> rList = rService.selectReplyList(boardNo);
+				if(rList.size() > 0) {
+					mv.addObject("rList", rList);
+				}
 				mv.addObject("board", board).setViewName("board/detail");
 			}else {
 				mv.addObject("msg", "게시글 데이터 조회를 실패하였습니다.");
