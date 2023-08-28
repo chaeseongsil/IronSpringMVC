@@ -14,6 +14,12 @@ public interface BoardService {
 	 */
 	public int insertBoard(Board board);
 	/**
+	 * 게시글 삭제 Service
+	 * @param boardNo
+	 * @return int
+	 */
+	public int deleteBoard(int boardNo);
+	/**
 	 * 전체 게시물 수 Service
 	 * @return int
 	 */

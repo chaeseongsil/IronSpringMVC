@@ -20,11 +20,14 @@
 	<insert id="insertBoard">
 		INSERT INTO BOARD_TBL VALUES(SEQ_BOARD_NO.NEXTVAL, #{boardTitle}, #{boardContent}, #{boardWriter}, #{boardFilename}, #{boardFileRename}, #{boardFilepath}, #{boardFileLength}, 0, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
+	<delete id="deleteBoard">
+		DELETE FROM BOARD_TBL WHERE BOARD_NO = #{boardNo}
+	</delete>
 	<select id="selectListCount" resultType="_int">
-		SELECT COUNT(*) FROM BOARD_TBL
+		SELECT COUNT(*) FROM BOARD_TBL WHERE B_STATUS = 'Y'
 	</select>
 	<select id="selectBoardList" resultMap="boardResultMap">
-		SELECT * FROM BOARD_TBL ORDER BY BOARD_NO DESC
+		SELECT * FROM BOARD_TBL WHERE B_STATUS = 'Y' ORDER BY BOARD_NO DESC
 	</select>
 	<select id="selectOneByNo" resultMap="boardResultMap">
 		SELECT * FROM BOARD_TBL WHERE BOARD_NO = #{boardNo}

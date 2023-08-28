@@ -112,6 +112,34 @@ public class BoardController {
 		}
 		return mv;
 	}
+	
+	@RequestMapping(value="/board/delete.kh", method=RequestMethod.GET)
+	public ModelAndView deleteBoard(
+			ModelAndView mv
+			, @RequestParam("boardNo") int boardNo
+			, HttpServletRequest request
+			) {
+		try {
+			Board board = service.selectOneByNo(boardNo);
+			String fileRename = board.getBoardFileRename();
+			this.deleteFile(request, fileRename);
+			int result = service.deleteBoard(boardNo);
+			if(result > 0) {
+				mv.setViewName("redirect:/board/list.kh");
+			}else {
+				mv.addObject("msg", "게시글 삭제를 실패하였습니다.");
+				mv.addObject("error", "게시글 삭제 실패");
+				mv.addObject("url", "/board/detail.kh?boardNo="+boardNo);
+				mv.setViewName("common/errorPage");
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", "관리자에게 문의해주세요.");
+			mv.addObject("error", e.getMessage());
+			mv.addObject("url", "/board/write.kh");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
 
 	private PageInfo getPageInfo(Integer currentPage, Integer totalCount) {
 		PageInfo pInfo = null;
@@ -159,5 +187,13 @@ public class BoardController {
 		fileMap.put("fileLength", fileLength);
 		// Map 리턴
 		return fileMap;
+	}
+	private void deleteFile(HttpServletRequest request, String fileReName) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String delFilepath = root+"\\buploadFiles\\"+fileReName;
+		File file = new File(delFilepath);
+		if(file.exists()) { // 파일이 존재하면 삭제
+			file.delete();
+		}
 	}
 }

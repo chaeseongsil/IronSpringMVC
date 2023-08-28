@@ -19,6 +19,12 @@ public interface ReplyService {
 	 */
 	public int updateReply(Reply reply);
 	/**
+	 * 댓글 삭제 Service
+	 * @param replyNo
+	 * @return int
+	 */
+	public int deleteReply(int replyNo);
+	/**
 	 * 댓글 조회 Service
 	 * @param boardNo 
 	 * @return List<Reply>

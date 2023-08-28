@@ -23,6 +23,13 @@ public interface ReplyStore {
 	 */
 	public int updateReply(SqlSession session, Reply reply);
 	/**
+	 * 댓글 삭제 Store
+	 * @param session
+	 * @param replyNo
+	 * @return int
+	 */
+	public int deleteReply(SqlSession session, int replyNo);
+	/**
 	 * 댓글 조회 Store
 	 * @param session
 	 * @param boardNo

@@ -44,7 +44,7 @@
 		</ul>
 		<div>
 			<button type="button" onclick="showModifyPage();">수정하기</button>
-			<button>삭제하기</button>
+			<button type="button" onclick="deleteBoard('${board.boardNo}');">삭제하기</button>
 			<button type="button" onclick="showboardList();">뒤로가기</button>
 		</div>
 		<!-- 댓글 등록 -->
@@ -70,8 +70,8 @@
 					<td>${reply.rCreateDate }</td>
 					<td>
 						<c:if test="${reply.replyWriter eq memberId }">
-							<a href="javascript:void(0)" onclick="showModifyForm(this);">수정하기</a>
-							<a href="#">삭제하기</a>
+							<a href="javascript:void(0);" onclick="showModifyForm(this);">수정하기</a>
+							<a href="javascript:void(0);" onclick="deleteReply('${reply.replyNo}', '${reply.refBoardNo }');">삭제하기</a>
 						</c:if>
 					</td>
 				</tr>
@@ -107,7 +107,8 @@
 				form.method = "post";
 				const inputTag1 = document.createElement("input");
 				inputTag1.type ="text";
-				inputTag1.value = "";
+				inputTag1.value = obj.parentElement.previousElementSibling.children[0].value;
+				// obj.parentElement.previousElementSibling.children[0].value
 				console.log(inputTag1.value);
 				inputTag1.name = "replyContent";
 				const inputTag2 = document.createElement("input");
@@ -128,6 +129,12 @@
 				
 				// 1. HTML 태그, display:none 사용하는 방법
 				obj.parentElement.parentElement.nextElementSibling.style.display = "block";
+			}
+			function deleteReply(replyNo, refBoardNo){
+				location.href="/reply/delete.kh?replyNo="+replyNo+"&refBoardNo="+refBoardNo;
+			}
+			function deleteBoard(boardNo){
+				location.href="/board/delete.kh?boardNo="+boardNo;
 			}
 			//function showModifyForm(obj, replyContent){
 				// 2. DOM프로그래밍을 이용하는 방법
@@ -151,7 +158,6 @@
 				const prevTrTag = obj.parentElement.parentElement;
 				prevTrTag.parentNode.insertBefore(trTag, prevTrTag.nextSibling); */
 			//}
-			
 			
 		</script>
 	</body>
