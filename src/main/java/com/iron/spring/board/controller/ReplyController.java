@@ -82,18 +82,28 @@ public class ReplyController {
 	@RequestMapping(value="/delete.kh", method=RequestMethod.GET)
 	public ModelAndView deleteReply(
 			ModelAndView mv
-			, @RequestParam("replyNo") int replyNo
-			, @RequestParam("refBoardNo") int refBoardNo
+			, @ModelAttribute Reply reply
+			, HttpSession session
 			) {
 		String url = "";
 		try {
-			int result = rService.deleteReply(replyNo);
-			if(result > 0) {
-				url = "/board/detail.kh?boardNo="+refBoardNo;
-				mv.setViewName("redirect:"+url);
+			String memberId = (String) session.getAttribute("memberId");
+			String replyWriter = reply.getReplyWriter();
+			if(replyWriter != null && replyWriter.equals(memberId)) {
+				// memberId.equals(replyWriter) => nullPointException 발생할 수 있음
+				int result = rService.deleteReply(reply);
+				if(result > 0) {
+					url = "/board/detail.kh?boardNo="+reply.getRefBoardNo();
+					mv.setViewName("redirect:"+url);
+				}else {
+					mv.addObject("msg", "댓글 삭제를 실패하였습니다.");
+					mv.addObject("error", "댓글 삭제 실패");
+					mv.addObject("url", url);
+					mv.setViewName("common/errorPage");
+				}
 			}else {
-				mv.addObject("msg", "댓글 삭제를 실패하였습니다.");
-				mv.addObject("error", "댓글 삭제 실패");
+				mv.addObject("msg", "댓글 작성자만 삭제할 수 있습니다.");
+				mv.addObject("error", "댓글 삭제 불가");
 				mv.addObject("url", url);
 				mv.setViewName("common/errorPage");
 			}

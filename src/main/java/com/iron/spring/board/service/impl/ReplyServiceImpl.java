@@ -37,8 +37,8 @@ public class ReplyServiceImpl implements ReplyService{
 	}
 
 	@Override
-	public int deleteReply(int replyNo) {
-		int result = rStore.deleteReply(session, replyNo);
+	public int deleteReply(Reply reply) {
+		int result = rStore.deleteReply(session, reply);
 		return result;
 	}
 }

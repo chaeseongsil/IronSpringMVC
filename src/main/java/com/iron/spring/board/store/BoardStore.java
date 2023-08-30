@@ -17,6 +17,13 @@ public interface BoardStore {
 	 */
 	public int insertBoard(SqlSession session, Board board);
 	/**
+	 * 게시글 수정 Store
+	 * @param session
+	 * @param board
+	 * @return int
+	 */
+	public int updateBoard(SqlSession session, Board board);
+	/**
 	 * 게시글 삭제 Store
 	 * @param session
 	 * @param boardNo

@@ -42,9 +42,19 @@
 				<a href="../resources/buploadFiles/${board.boardFileRename }" download>${board.boardFilename }</a>
 			</li>
 		</ul>
+		<c:url var="boardDelUrl" value="/board/delete.kh">
+			<c:param name="boardWriter" value="${board.boardWriter }"></c:param>
+			<c:param name="boardNo" value="${board.boardNo }"></c:param>
+		</c:url>
+		<c:url var="modifyUrl" value="/board/modify.kh">
+			<c:param name="boardWriter" value="${board.boardWriter }"></c:param>
+			<c:param name="boardNo" value="${board.boardNo }"></c:param>
+		</c:url>
 		<div>
-			<button type="button" onclick="showModifyPage();">수정하기</button>
-			<button type="button" onclick="deleteBoard('${board.boardNo}');">삭제하기</button>
+			<c:if test="${board.boardWriter eq memberId }">
+				<button type="button" onclick="showModifyPage('${modifyUrl}');">수정하기</button>
+				<button type="button" onclick="deleteBoard('${boardDelUrl}');">삭제하기</button>
+			</c:if>
 			<button type="button" onclick="showboardList();">뒤로가기</button>
 		</div>
 		<!-- 댓글 등록 -->
@@ -71,7 +81,14 @@
 					<td>
 						<c:if test="${reply.replyWriter eq memberId }">
 							<a href="javascript:void(0);" onclick="showModifyForm(this);">수정하기</a>
-							<a href="javascript:void(0);" onclick="deleteReply('${reply.replyNo}', '${reply.refBoardNo }');">삭제하기</a>
+							<c:url var="delUrl" value="/reply/delete.kh">
+								<c:param name="replyNo" value="${reply.replyNo }"></c:param>
+								<!-- 성공하면 detail로 가게 하기 위해 boardNo 셋팅 -->
+								<c:param name="refBoardNo" value="${reply.refBoardNo }"></c:param>
+								<!-- 본인이 쓴 글만 지울 수 있게하기위해 추가 -->
+								<c:param name="replyWriter" value="${reply.replyWriter }"></c:param>
+							</c:url>
+							<a href="javascript:void(0);" onclick="deleteReply('${delUrl}');">삭제하기</a>
 						</c:if>
 					</td>
 				</tr>
@@ -93,9 +110,8 @@
 			</c:forEach>
 		</table>
 		<script>
-			function showModifyPage(){
-				const boardNo = '${board.boardNo}';
-				location.href="/board/modify.kh?boardNo="+boardNo;
+			const showModifyPage = (modifyUrl) => {
+				location.href = modifyUrl;
 			}
 			function showboardList(){
 				location.href="/board/list.kh";
@@ -130,11 +146,11 @@
 				// 1. HTML 태그, display:none 사용하는 방법
 				obj.parentElement.parentElement.nextElementSibling.style.display = "block";
 			}
-			function deleteReply(replyNo, refBoardNo){
-				location.href="/reply/delete.kh?replyNo="+replyNo+"&refBoardNo="+refBoardNo;
+			function deleteReply(delUrl){
+				location.href= delUrl;
 			}
-			function deleteBoard(boardNo){
-				location.href="/board/delete.kh?boardNo="+boardNo;
+			function deleteBoard(boardDelUrl){
+				location.href = boardDelUrl;
 			}
 			//function showModifyForm(obj, replyContent){
 				// 2. DOM프로그래밍을 이용하는 방법

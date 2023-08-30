@@ -25,10 +25,10 @@ public interface ReplyStore {
 	/**
 	 * 댓글 삭제 Store
 	 * @param session
-	 * @param replyNo
+	 * @param reply
 	 * @return int
 	 */
-	public int deleteReply(SqlSession session, int replyNo);
+	public int deleteReply(SqlSession session, Reply reply);
 	/**
 	 * 댓글 조회 Store
 	 * @param session
